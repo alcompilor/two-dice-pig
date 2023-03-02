@@ -4,7 +4,7 @@
 """Unit testing."""
 
 import unittest
-import player
+from src.player.player import Player
 
 
 class TestPlayer(unittest.TestCase):
@@ -12,13 +12,13 @@ class TestPlayer(unittest.TestCase):
 
     def test_init(self):
         """Test the constuctor for the class."""
-        player1 = player.Player("Computer", False)
+        player1 = Player("Computer", False)
 
         res1 = player1.get_name()
         exp1 = "Computer"
         res2 = player1.is_computer()
 
-        player2 = player.Player("Sarah", True)
+        player2 = Player("Sarah", True)
 
         res3 = player2.get_name()
         exp3 = "Sarah"
@@ -33,10 +33,10 @@ class TestPlayer(unittest.TestCase):
 
     def test_is_computer(self):
         """Test method that validates whether a player is a computer or not."""
-        player1 = player.Player("Ahmed", False)
+        player1 = Player("Ahmed", False)
         res1 = player1.is_computer()
 
-        player2 = player.Player("Computer", True)
+        player2 = Player("Computer", True)
         res2 = player2.is_computer()
 
         self.assertFalse(res1)
@@ -44,11 +44,11 @@ class TestPlayer(unittest.TestCase):
 
     def test_get_name(self):
         """Test to fetch and return correct name for player."""
-        player1 = player.Player("SomeName", False)
+        player1 = Player("SomeName", False)
         res1 = player1.get_name()
         exp1 = "SomeName"
 
-        player2 = player.Player(123, False)
+        player2 = Player(123, False)
         res2 = player2.get_name()
         exp2 = "123"
 
@@ -57,7 +57,7 @@ class TestPlayer(unittest.TestCase):
 
     def test_set_name(self):
         """Test method to set a correct name for player."""
-        player1 = player.Player("HelloWorld", False)
+        player1 = Player("HelloWorld", False)
         player1.set_name("RealName")
 
         res = player1.get_name()
