@@ -9,13 +9,13 @@ init: requirements.txt
 flake8:
 	@printf "\n\e[\033[0;45m\e[1m LINTING: \e[0m\n"
 	@printf "\n\e[\033[0;44m\e[1m FLAKE8 REPORT: \e[0m\n"
-	-flake8 $(dir)/*.py
+	-flake8 $(dir)
 	@printf "\n"
 
 # Run pylint on a specified directory #
 pylint:
 	@printf "\n\e[\033[0;44m\e[1m PYLINT REPORT: \e[0m\n"
-	-pylint $(dir)/*.py
+	-pylint $(dir)
 	@printf "\n"
 
 # Run pylint and flake8 together #
