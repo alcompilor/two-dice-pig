@@ -4,7 +4,7 @@
 """Unit testing."""
 
 import unittest
-import computer
+from src.computer.computer import Computer
 
 
 class TestComputer(unittest.TestCase):
@@ -12,7 +12,7 @@ class TestComputer(unittest.TestCase):
 
     def test_init(self):
         """Tests constructor of the computer class."""
-        comp = computer.Computer(3)  # testing with good value
+        comp = Computer(3)  # testing with good value
 
         res1 = comp.get_difficulty()
         exp1 = 3
@@ -23,7 +23,7 @@ class TestComputer(unittest.TestCase):
         res3 = comp.get_biased_list()
         exp3 = [1, 2, 3, 4, 4, 4, 5, 5, 6, 6]
 
-        comp2 = computer.Computer(4)  # testing with bad value
+        comp2 = Computer(4)  # testing with bad value
 
         res4 = comp2.get_difficulty()
         exp4 = 1
@@ -44,7 +44,7 @@ class TestComputer(unittest.TestCase):
 
     def test_get_difficulty(self):
         """Fetches value of difficulty variable and tests if it's correct."""
-        comp = computer.Computer(2)
+        comp = Computer(2)
         res = comp.get_difficulty()
         exp = 2
 
@@ -52,7 +52,7 @@ class TestComputer(unittest.TestCase):
 
     def test_set_difficulty(self):
         """Sets difficulty and verifies it."""
-        comp = computer.Computer(1)
+        comp = Computer(1)
         comp.set_difficulty(2)
         res = comp.get_difficulty()
         exp = 2
@@ -61,7 +61,7 @@ class TestComputer(unittest.TestCase):
 
     def test_set_probability(self):
         """Test setting the probability of getting each dice face."""
-        comp = computer.Computer(1)
+        comp = Computer(1)
         comp.set_probability()
 
         res = comp.get_probability()
@@ -71,7 +71,7 @@ class TestComputer(unittest.TestCase):
 
     def test_get_probability(self):
         """Fetches value of probability variable and tests if it's correct."""
-        comp = computer.Computer(1)
+        comp = Computer(1)
         res = comp.get_probability()
         exp = (20, 30, 20, 10, 10, 10)
 
@@ -79,7 +79,7 @@ class TestComputer(unittest.TestCase):
 
     def test_generate_biased_list(self):
         """Generate biased dice faces list based on probability & verify it."""
-        comp = computer.Computer(1)
+        comp = Computer(1)
         res = comp.generate_biased_list()
         exp = [1, 1, 2, 2, 2, 3, 3, 4, 5, 6]
 
@@ -87,7 +87,7 @@ class TestComputer(unittest.TestCase):
 
     def test_get_biased_list(self):
         """Tests if biased list is fetched correctly."""
-        comp = computer.Computer(2)
+        comp = Computer(2)
 
         res = comp.get_biased_list()
         exp = [1, 2, 2, 3, 3, 3, 4, 5, 5, 6]
