@@ -43,6 +43,18 @@ Go to the game directory
   cd two-dice-pig
 ```
 
+Create and activate a virtual environment - (Linux/macOS) 
+
+```bash
+  python -m venv venv && source ./venv/bin/activate
+```
+
+Create and activate a virtual environment - (Windows)
+
+```bash
+  python -m venv venv && . .venv/Scripts/activate
+```
+
 Install required dependencies
 
 ```bash
@@ -55,6 +67,11 @@ Run the game
   make play
 ```
 
+Don't forget to deactivate the virtual environment when done
+
+```bash
+  deactivate
+```
 
 ## ⚙️ Running Tests - for development purposes
 
