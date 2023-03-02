@@ -108,3 +108,13 @@ Example - To view documentation for the player module in the player package one 
 As a result one would get:
 
 ![Documentation for modules](https://i.imgur.com/TyDxR0x.png)
+
+## 📝 UML - for development purposes
+
+To generate UML for the codebase, simply run the following command
+
+```bash
+  make uml
+```
+
+After running the command, UMLs will be generated in the root directory.
