@@ -1,4 +1,3 @@
-
 # Two-Dice Pig Game
 
 Here's a brief description of how to play the game:
@@ -15,7 +14,6 @@ Here's a brief description of how to play the game:
 
 - The first player to reach a predetermined winning score (100 points) wins the game.
 
-
 ## ⚠️ Requirements
 
 **python** - >= v3.10
@@ -24,12 +22,11 @@ Here's a brief description of how to play the game:
 
 **pip** - Usually comes with Python but you might need to manually install it
 
-
-
-
+**graphviz** - Optional and only required in case you want to generate UML for the codebase
 
 ## 🎲 Get Started
-*Follow the steps below to start playing the game*
+
+_Follow the steps below to start playing the game_
 
 Clone the game
 
@@ -43,7 +40,7 @@ Go to the game directory
   cd two-dice-pig
 ```
 
-Create and activate a virtual environment - (Linux/macOS) 
+Create and activate a virtual environment - (Linux/macOS)
 
 ```bash
   python -m venv venv && source ./venv/bin/activate
@@ -72,6 +69,8 @@ Don't forget to deactivate the virtual environment when done
 ```bash
   deactivate
 ```
+
+**_Note:_** _Running 'make' without specifying any args will result in 'make init' being invoked._
 
 ## ⚙️ Running Tests - for development purposes
 
