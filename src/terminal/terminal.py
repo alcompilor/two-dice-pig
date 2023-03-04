@@ -108,8 +108,8 @@ class Terminal:
         """Clear the display."""
         match (platform.system()):
             case 'Windows' | 'windows':
-                os.system('cls')
+                return os.system('cls')
             case 'Linux' | 'linux':
-                os.system('clear')
+                return os.system('clear')
             case _:
-                os.system('clear')
+                return os.system('clear')
