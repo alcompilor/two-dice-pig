@@ -4,6 +4,7 @@
 """Terminal module to implement decent graphical representation."""
 
 import os
+import platform
 from textwrap import dedent
 import climage
 import art
@@ -105,4 +106,10 @@ class Terminal:
 
     def display_clear(self):
         """Clear the display."""
-        return os.system('cls' if os.name == 'nt' else 'clear')
+        match (platform.system()):
+            case 'Windows' | 'windows':
+                os.system('cls')
+            case 'Linux' | 'linux':
+                os.system('clear')
+            case _:
+                os.system('clear')
