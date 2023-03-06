@@ -4,28 +4,21 @@
 class Scoreboard:
     """Scoreboard Class."""
 
-    def __init__(self):
-        self.scores = {1: 0, 2: 0}
+    def __init__(self,max_scores=10):
+        """Create the new high score."""
+        self.max_scores = max_scores
+        self.scores = []
 
-    def update_score(self, player, points):
-        """"Update score."""
-        if player not in self.scores:
-            raise ValueError(f'Invalid player: {player}')
-        self.scores[player] += points
+    def add_score(self, name, score):
+        """Add a new score to the list."""
+        self.scores.append((name, score))
+        self.scores.sort(reverse=True, key=lambda x: x[1])
+        self.scores = self.scores[:self.max_scores]
 
-    def get_score(self, player):
-        """Get the score."""
-        if player not in self.scores:
-            raise ValueError(f'Invalid player: {player}')
-        return self.scores[player]
+    def __str__(self):
+        """Return a string representation of the high score."""
+        lines = ["HIGH SCORES:"]
+        for i, (name, score) in enumerate(self.scores):
+            lines.append(f"{i+1}. {name}: {score}")
+        return "\n".join(lines)
 
-    def print_scores(self):
-        """Show the score."""
-        print(f"Player 1: {self.scores[1]}")
-        print(f"Player 2: {self.scores[2]}")
-
-
-scoreboard = Scoreboard()
-scoreboard.update_score(1, 5)
-scoreboard.update_score(2, 5)
-scoreboard.print_scores()

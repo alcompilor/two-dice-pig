@@ -1,27 +1,24 @@
 import unittest
-from scoreboard import Scoreboard
+from src.scoreboard.scoreboard  import Scoreboard
+
+"""Test Scoreboard class"""
 
 class ScoreboardTestCase(unittest.TestCase):
-    def setUp(self):
-        self.scoreboard = Scoreboard()
 
-    def test_initial_scores(self):
-        self.assertEqual(self.scoreboard.get_score(1), 0)
-        self.assertEqual(self.scoreboard.get_score(2), 0)
+     """First test"""
+    
+    def test_add_score(self):
+    
+     """Try multiple numbers. """
 
-    def test_update_score(self):
-        self.scoreboard.update_score(1, 5)
-        self.assertEqual(self.scoreboard.get_score(1), 5)
-        self.scoreboard.update_score(2, 3)
-        self.assertEqual(self.scoreboard.get_score(2), 3)
-
-    def test_invalid_player(self):
-         with self.assertRaises(ValueError):
-                self.scoreboard.update_score(3, 10)
-         with self.assertRaises(ValueError):
-             self.scoreboard.get_score(3)
+     hs = HighScore(max_scores = 3)
+     hs.add_score("Alex", 100)
+     hs.add_score("Bob", 50)
+     hs.add_score("Richard", 75)
+     self.assertEqual(str(hs), "HIGH SCORES:\n1. Alex: 100 \n2. Richard: 75 \n3. Bob: 50 ") 
+     hs.add_score("David", 90)
+     self.assertEqual(str(hs), "HIGH SCORES: \n1. Alex:10 \n2. David: 90 \n3. Richard: 75")
 
 
 if __name__ == "__main__":
     unittest.main()
-
