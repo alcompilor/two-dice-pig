@@ -4,6 +4,8 @@
 """Terminal module to implement decent graphical representation."""
 
 import os
+import platform
+from textwrap import dedent
 import climage
 import art
 import tabulate
@@ -20,7 +22,7 @@ class Terminal:
         """Display game intro image."""
         return print(
             climage.convert(
-                'src/graphics/img/dice_intro.jpg',
+                'src/terminal/img/dice_intro.jpg',
                 is_unicode=True,
                 width=61,
                 palette="gruvbox"
@@ -34,7 +36,11 @@ class Terminal:
 
     def display_intro_menu(self):
         """Display game intro/main menu."""
-        return print("1. Player vs Player\n2. Player vs Computer\n3. Quit\n")
+        return print(dedent("""\
+                    1. Player vs Player
+                    2. Player vs Computer
+                    3. View game rules
+                    4. Quit\n"""))
 
     def display_computer_menu(self):
         """Display computer difficulty menu."""
@@ -42,20 +48,43 @@ class Terminal:
 
     def display_realtime_menu(self):
         """Display a realtime menu when playing."""
-        return print("1. Roll the dice\n2. Pass\n3.Change name\n\
-                     4. Exit current game\n")
+        return print(dedent("""\
+                    1. Roll the dice
+                    2. Pass
+                    3. Change name
+                    4. Exit current game\n"""))
+
+    def display_rules(self):
+        """Display rules of the game."""
+        return print(dedent("""\
+                    Here's a brief description of how to play the game:\n
+                     - The game is played by two players or against the
+                     computer, and each turn consists of a player rolling
+                     two six-sided dice.\n
+                     - The player's score for that turn is the sum of the
+                     numbers rolled on the dice.\n
+                     - The player can choose to roll again and add the new
+                     sum to their current score, or they can choose to end
+                     their turn and keep their current score.\n
+                     - If the player rolls a one on either of the dice, their
+                     turn ends and their score for that turn is zero.\n
+                     - If the player rolls a one on both of the dice, their
+                     turn ends and their entire score during that round will
+                     be lost.\n
+                     - The first player to reach a predetermined winning
+                     score (100 points) wins the game.\n"""))
 
     def display_dice(self, face1, face2):
         """Display the two dices a player gets."""
         dice1 = climage.convert(
-            f'src/graphics/img/dice_{face1}.png',
+            f'src/terminal/img/dice_{face1}.png',
             is_unicode=True,
             is_truecolor=True,
             is_256color=False,
             width=12
         )
         dice2 = climage.convert(
-            f'src/graphics/img/dice_{face2}.png',
+            f'src/terminal/img/dice_{face2}.png',
             is_unicode=True,
             is_truecolor=True,
             is_256color=False,
@@ -77,4 +106,8 @@ class Terminal:
 
     def display_clear(self):
         """Clear the display."""
-        return os.system('cls' if os.name == 'nt' else 'clear')
+        match (platform.system()):
+            case 'Windows' | 'windows':
+                return os.system('cls')
+            case _:
+                return os.system('clear')
