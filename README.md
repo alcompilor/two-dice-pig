@@ -1,4 +1,4 @@
-# Two-Dice Pig Game
+# 🎮 Two-Dice Pig Game
 
 Here's a brief description of how to play the game:
 
@@ -90,6 +90,8 @@ As a result one would get:
 
 ![Linting and Unit testing](https://i.imgur.com/ECKY5Ck.png)
 
+**_Note:_** _Windows users must use a bash terminal such as [git bash](https://gitforwindows.org/) in order for this to work correctly._
+
 ## 📃 Documentation - for development purposes
 
 To view documentation for specific module, run the following command
@@ -108,6 +110,8 @@ As a result one would get:
 
 ![Documentation for modules](https://i.imgur.com/TyDxR0x.png)
 
+**_Note:_** _Windows users might need to use a bash terminal such as [git bash](https://gitforwindows.org/) in order for this to work correctly._
+
 ## 📝 UML - for development purposes
 
 To generate UML for the codebase, simply run the following command
@@ -117,3 +121,5 @@ To generate UML for the codebase, simply run the following command
 ```
 
 After running the command, UMLs will be generated in the root directory.
+
+**_Note:_** _Windows users might need to use a bash terminal such as [git bash](https://gitforwindows.org/) in order for this to work correctly._
