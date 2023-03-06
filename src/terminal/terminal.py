@@ -22,7 +22,7 @@ class Terminal:
         """Display game intro image."""
         return print(
             climage.convert(
-                'src/graphics/img/dice_intro.jpg',
+                'src/terminal/img/dice_intro.jpg',
                 is_unicode=True,
                 width=61,
                 palette="gruvbox"
@@ -77,14 +77,14 @@ class Terminal:
     def display_dice(self, face1, face2):
         """Display the two dices a player gets."""
         dice1 = climage.convert(
-            f'src/graphics/img/dice_{face1}.png',
+            f'src/terminal/img/dice_{face1}.png',
             is_unicode=True,
             is_truecolor=True,
             is_256color=False,
             width=12
         )
         dice2 = climage.convert(
-            f'src/graphics/img/dice_{face2}.png',
+            f'src/terminal/img/dice_{face2}.png',
             is_unicode=True,
             is_truecolor=True,
             is_256color=False,
@@ -109,7 +109,5 @@ class Terminal:
         match (platform.system()):
             case 'Windows' | 'windows':
                 return os.system('cls')
-            case 'Linux' | 'linux':
-                return os.system('clear')
             case _:
                 return os.system('clear')
