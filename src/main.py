@@ -5,6 +5,7 @@ from player.player import Player
 from scoreboard.scoreboard import Scoreboard
 from terminal.terminal import Terminal
 
+
 class Main(Cmd):
     terminal = Terminal()
     terminal.display_title()
@@ -14,6 +15,7 @@ class Main(Cmd):
     prompt = ">> "
 
     def do_multiplayer(self, arg):
+        """Command to run a player vs player game."""
         player1 = str(input("Enter your name (Player 1): "))
         player2 = str(input("Enter your name (Player 2): "))
         player1 = Player(player1, False)
@@ -22,7 +24,7 @@ class Main(Cmd):
         scoreboard = Scoreboard([player1.get_name(), player2.get_name()])
         terminal = Terminal()
         dice = Dice()
-        
+
         tracker = 1
         while not scoreboard.get_winner():
             # terminal.display_clear()
@@ -41,31 +43,38 @@ class Main(Cmd):
 
             match(choice):
                 case 1:
-                    print(tracker)
                     result = dice.roll([1, 2, 3, 4, 5, 6])
                     terminal.display_dice(result['cast'])
                     if tracker == 1:
-                        if 1 in result['cast']:
+                        if result['cast'][0] == 1 and result['cast'][1] == 1:
                             scoreboard.reset_score(player1.get_name())
+                        elif 1 in result['cast']:
+                            tracker = 2
+                            continue
                         else:
-                            scoreboard.update_score(player1.get_name(), result['sum'])
+                            scoreboard.update_score(
+                                player1.get_name(), result['sum'])
                     else:
-                        if 1 in result['cast']:
+                        print(player2.get_name())
+                        if result['cast'][0] == 1 and result['cast'][1] == 1:
                             scoreboard.reset_score(player2.get_name())
+                        elif 1 in result['cast']:
+                            tracker = 1
+                            continue
                         else:
-                            scoreboard.update_score(player2.get_name(), result['sum'])
+                            scoreboard.update_score(
+                                player2.get_name(), result['sum'])
                 case 2:
                     if tracker == 1:
                         tracker = 2
-                        
+
                     else:
                         tracker = 1
-                        
+
                 case 3:
                     print("3")
                 case 4:
                     print("4")
-
 
 
 if __name__ == '__main__':
