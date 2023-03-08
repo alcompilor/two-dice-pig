@@ -1,6 +1,6 @@
 """Test Dice"""
 import unittest
-
+from src.dice.dice import Dice
 
 class TestDice(unittest.TestCase):
     def test_roll(self):
@@ -8,6 +8,4 @@ class TestDice(unittest.TestCase):
         for _ in range(100):
             roll = d.roll()
             self.assertGreaterEqual(roll, 1)
-            self.assertGreaterEqual(roll, 6)
-
-
+            self.assertLessEqual(roll, 6)
