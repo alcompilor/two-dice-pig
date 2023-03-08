@@ -103,6 +103,11 @@ class Terminal:
         )
         return print(f'{parsed_table}\n')
 
+    def display_winner(self, player_name):
+        """Display game winner."""
+        return print(art.text2art(f"{player_name}  won!",
+                                  font="tarty1"))
+
     def display_clear(self):
         """Clear the display."""
         match (platform.system()):
