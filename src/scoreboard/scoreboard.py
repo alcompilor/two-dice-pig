@@ -1,24 +1,43 @@
-""""Scoreboard module."""
+"""Scoreboard module."""
 
 
 class Scoreboard:
     """Scoreboard Class."""
 
-    def __init__(self,max_scores=10):
+    def __init__(self):
         """Create the new high score."""
-        self.max_scores = max_scores
+        self.max_score = 100
+        self.winner = None
         self.scores = []
+    
+    def add_players(self, players_list):
+        for player in players_list:
+            self.scores.append([player, 0])
 
-    def add_score(self, name, score):
+
+    def update_score(self, name, score):
         """Add a new score to the list."""
-        self.scores.append((name, score))
-        self.scores.sort(reverse=True, key=lambda x: x[1])
-        self.scores = self.scores[:self.max_scores]
+        for i in range(0, len(self.scores)-1):
+            if name in self.scores[i][0]:
+                self.scores[i][1] = score
+    
+    
+    def reset_score(self, name):
+        for i in range(0, len(self.scores)-1):
+            if name in self.scores[i][0]:
+                self.scores[i][1] = 0
+    
+    def get_winner(self):
+        for score_list in self.scores:
+            if score_list[1] == 100:
+                self.winner = score_list[0]
+                return self.winner
+            else:
+                return None
+    
 
-    def __str__(self):
-        """Return a string representation of the high score."""
-        lines = ["HIGH SCORES:"]
-        for i, (name, score) in enumerate(self.scores):
-            lines.append(f"{i+1}. {name}: {score}")
-        return "\n".join(lines)
+    def get_player(self, name):
+        for score_list in self.scores:
+           if score_list[0] == name:
+               return score_list
 
