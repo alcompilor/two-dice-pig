@@ -96,13 +96,12 @@ class Terminal:
         """Display a table which keeps track of the scoreboard."""
         table = score_list
         headers = ["Player", "Score"]
-        return print(
-            tabulate.tabulate(
-                table,
-                headers,
-                tablefmt="heavy_outline"
-            )
+        parsed_table = tabulate.tabulate(
+            table,
+            headers,
+            tablefmt="heavy_outline"
         )
+        return print(f'{parsed_table}\n')
 
     def display_clear(self):
         """Clear the display."""
