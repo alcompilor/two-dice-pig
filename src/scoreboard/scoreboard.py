@@ -14,7 +14,7 @@ class Scoreboard:
 
     def update_score(self, name, score):
         """Add a new score to the list."""
-        for i in range(0, len(self.scores)-1):
+        for i in enumerate(len(self.scores)):
             if name in self.scores[i][0]:
                 self.scores[i][1] += score
 
