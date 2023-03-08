@@ -74,17 +74,17 @@ class Terminal:
                      - The first player to reach a predetermined winning
                      score (100 points) wins the game.\n"""))
 
-    def display_dice(self, face1, face2):
+    def display_dice(self, faces_tuple):
         """Display the two dices a player gets."""
         dice1 = climage.convert(
-            f'src/terminal/img/dice_{face1}.png',
+            f'src/terminal/img/dice_{faces_tuple[0]}.png',
             is_unicode=True,
             is_truecolor=True,
             is_256color=False,
             width=12
         )
         dice2 = climage.convert(
-            f'src/terminal/img/dice_{face2}.png',
+            f'src/terminal/img/dice_{faces_tuple[1]}.png',
             is_unicode=True,
             is_truecolor=True,
             is_256color=False,
