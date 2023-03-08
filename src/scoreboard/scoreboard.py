@@ -33,8 +33,7 @@ class Scoreboard:
             if self.scores[i][1] >= 100:
                 self.winner = self.scores[i][0]
                 return self.winner
-            else:
-                return None
+        return None
 
     def get_player(self, name):
         """Player getter."""
