@@ -25,7 +25,7 @@ class Scoreboard:
 
     def get_winner(self):
         for score_list in self.scores:
-            if score_list[1] == 100:
+            if score_list[1] >= 100:
                 self.winner = score_list[0]
                 return self.winner
             else:
