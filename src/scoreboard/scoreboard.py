@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 """Scoreboard module."""
 
 
@@ -19,11 +22,13 @@ class Scoreboard:
                 self.scores[i][1] += score
 
     def reset_score(self, name):
+        """Reset the score of players."""
         for i, _ in enumerate(self.scores):
             if name in self.scores[i][0]:
                 self.scores[i][1] = 0
 
     def get_winner(self):
+        """Get the winner."""
         for i, _ in enumerate(self.scores):
             if self.scores[i][1] >= 100:
                 self.winner = self.scores[i][0]
@@ -32,9 +37,11 @@ class Scoreboard:
                 return None
 
     def get_player(self, name):
+        """Player getter."""
         for i, _ in enumerate(self.scores):
             if self.scores[i][0] == name:
                 return self.scores[i]
 
     def get_scores(self):
+        """Scores getter."""
         return self.scores
