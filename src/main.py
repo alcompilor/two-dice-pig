@@ -31,6 +31,11 @@ class Main(Cmd):
             terminal.display_table(scoreboard.get_scores())
             terminal.display_realtime_menu()
 
+            if tracker == 1:
+                print(f"It's {player1.get_name()}'s turn")
+            else:
+                print(f"It's {player2.get_name()}'s turn")
+
             while True:
                 try:
                     choice = int(input("Choose an option > "))
@@ -55,7 +60,7 @@ class Main(Cmd):
                             scoreboard.update_score(
                                 player1.get_name(), result['sum'])
                     else:
-                        print(player2.get_name())
+                        print(scoreboard.get_player(player2.get_name()))
                         if result['cast'][0] == 1 and result['cast'][1] == 1:
                             scoreboard.reset_score(player2.get_name())
                         elif 1 in result['cast']:
