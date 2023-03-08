@@ -24,17 +24,17 @@ class Scoreboard:
                 self.scores[i][1] = 0
 
     def get_winner(self):
-        for score_list in self.scores:
-            if score_list[1] >= 100:
-                self.winner = score_list[0]
+        for i, _ in enumerate(self.scores):
+            if self.scores[i][1] >= 100:
+                self.winner = self.scores[i][0]
                 return self.winner
             else:
                 return None
 
     def get_player(self, name):
-        for score_list in self.scores:
-            if score_list[0] == name:
-                return score_list
+        for i, _ in enumerate(self.scores):
+            if self.scores[i][0] == name:
+                return self.scores[i]
 
     def get_scores(self):
         return self.scores
