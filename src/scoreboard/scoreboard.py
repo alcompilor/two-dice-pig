@@ -4,16 +4,14 @@
 class Scoreboard:
     """Scoreboard Class."""
 
-    def __init__(self):
+    def __init__(self, players_list):
         """Create the new high score."""
         self.max_score = 100
         self.winner = None
         self.scores = []
-    
-    def add_players(self, players_list):
         for player in players_list:
             self.scores.append([player, 0])
-
+    
 
     def update_score(self, name, score):
         """Add a new score to the list."""
@@ -40,4 +38,7 @@ class Scoreboard:
         for score_list in self.scores:
            if score_list[0] == name:
                return score_list
+
+    def get_scores(self):
+        return self.scores
 
