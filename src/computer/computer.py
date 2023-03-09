@@ -3,6 +3,8 @@
 
 """Computer module implementing a simple concept to control its difficulty."""
 
+from random import shuffle
+
 
 class Computer:
     """Computer class."""
@@ -12,6 +14,7 @@ class Computer:
         self.difficulty = difficulty if 0 < difficulty < 4 else 1
         self.probability = self.set_probability()
         self.biased_list = self.generate_biased_list()
+        self.decision_list = self.generate_decision_list()
 
     def get_difficulty(self):
         """Fetch and return computer difficulty."""
@@ -38,7 +41,7 @@ class Computer:
         return self.probability
 
     def generate_biased_list(self):
-        """Generate biased tuple based on probability."""
+        """Generate biased list based on probability."""
         biased_list = []
         current_face = 0
         for i in self.get_probability():
@@ -46,8 +49,30 @@ class Computer:
             current_face += 1
             for _ in range(i):
                 biased_list.append(current_face)
+        shuffle(biased_list)
         return biased_list
 
     def get_biased_list(self):
         """Fetch and return biased list with dice faces."""
         return self.biased_list
+
+    def generate_decision_list(self):
+        """Generate decision list to pass or roll based on difficulty."""
+        match(self.get_difficulty()):
+            case 1:
+                decision_list = ["pass", "pass", "roll", "roll", "roll"]
+                shuffle(decision_list)
+                return decision_list
+            case 2:
+                decision_list = ["pass", "roll", "roll", "roll"]
+                shuffle(decision_list)
+                return decision_list
+            case 3:
+                decision_list = ["pass", "roll", "roll",
+                                 "roll", "roll", "roll"]
+                shuffle(decision_list)
+                return decision_list
+
+    def get_decision_list(self):
+        """Fetch and return decision list."""
+        return self.decision_list
