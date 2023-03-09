@@ -3,6 +3,7 @@
 
 """Main module to implement the logic of the game."""
 
+# pylint: disable=import-error
 import random
 import time
 from textwrap import dedent
@@ -50,7 +51,7 @@ class Main(Cmd):
                 case 1:
                     terminal.display_clear()
 
-                    cast, sum_score = dice.roll([1, 2, 3, 4, 5, 6]).values()
+                    cast, sum_score = dice.roll(dice.faces).values()
                     terminal.display_dice(cast)
 
                     if tracker == 1:
@@ -59,6 +60,7 @@ class Main(Cmd):
                             scoreboard.reset_score(player1.get_name())
                             tracker = 2
                             continue
+
                         if (cast[0] == 1) or (cast[1] == 1):
                             tracker = 2
                             continue
@@ -71,6 +73,7 @@ class Main(Cmd):
                             scoreboard.reset_score(player2.get_name())
                             tracker = 1
                             continue
+
                         if (cast[0] == 1) or (cast[1] == 1):
                             tracker = 1
                             continue
@@ -79,6 +82,7 @@ class Main(Cmd):
                             player2.get_name(), sum_score)
                 case 2:
                     terminal.display_clear()
+
                     if tracker == 1:
                         tracker = 2
                         continue
@@ -88,10 +92,18 @@ class Main(Cmd):
 
                 case 3:
                     new_name = str(input("Enter a new name: "))
+
                     if tracker == 1:
+                        scoreboard.update_name(
+                            player1.get_name(), new_name)
                         player1.set_name(new_name)
+
                     else:
+                        scoreboard.update_name(
+                            player2.get_name(), new_name)
                         player2.set_name(new_name)
+
+                    terminal.display_clear()
                 case 4:
                     break
 
@@ -107,7 +119,7 @@ class Main(Cmd):
         terminal.display_computer_menu()
         difficulty = validate("Choose bot difficulty > ", "Invalid option!")
 
-        computer = Computer(difficulty)
+        bot = Computer(difficulty)
         terminal.display_clear()
 
         tracker = 1
@@ -118,14 +130,17 @@ class Main(Cmd):
             if tracker == 2:
                 terminal.display_clear()
                 print(f"{player2.get_name()} turn")
-                computer_decision = random.choice(
-                    ['pass', 'roll', 'roll', 'roll'])
-                if computer_decision == "roll":
+
+                bot_decision = random.choice(bot.get_decision_list())
+
+                if bot_decision == "roll":
+
                     print(f"{player2.get_name()} chose to roll!\n")
-                    result_bot = dice.roll(computer.get_biased_list())
-                    terminal.display_dice(result_bot['cast'])
-                    if (result_bot['cast'][0] == 1 and
-                            result_bot['cast'][1] == 1):
+                    cast, sum_score = dice.roll(bot.get_biased_list()).values()
+
+                    terminal.display_dice(cast)
+
+                    if (cast[0] == 1) and (cast[1] == 1):
                         scoreboard.reset_score(player2.get_name())
                         tracker = 1
                         print(
@@ -133,18 +148,20 @@ class Main(Cmd):
                         time.sleep(4)
                         terminal.display_clear()
                         continue
-                    elif 1 in result_bot['cast']:
+
+                    if (cast[0] == 1) or (cast[1] == 1):
                         tracker = 1
                         print(f"{player2.get_name()} lost their turn :/\n")
                         time.sleep(4)
                         terminal.display_clear()
                         continue
-                    else:
-                        scoreboard.update_score(
-                            player2.get_name(), result_bot['sum'])
-                        terminal.display_table(scoreboard.get_scores())
-                        time.sleep(4)
-                        continue
+
+                    scoreboard.update_score(
+                        player2.get_name(), sum_score)
+                    terminal.display_table(scoreboard.get_scores())
+                    time.sleep(4)
+                    continue
+
                 else:
                     print(f"{player2.get_name()} chose to pass..\n")
                     tracker = 1
@@ -158,36 +175,43 @@ class Main(Cmd):
                 match(choice):
                     case 1:
                         terminal.display_clear()
-                        result = dice.roll([1, 2, 3, 4, 5, 6])
-                        terminal.display_dice(result['cast'])
+
+                        cast, sum_score = dice.roll(dice.faces).values()
+                        terminal.display_dice(cast)
+
                         if tracker == 1:
-                            if result['cast'][0] == 1 and result['cast'][1] == 1:
+
+                            if (cast[0] == 1) and (cast[1] == 1):
                                 scoreboard.reset_score(player1.get_name())
                                 print("You lost your entire score :(")
                                 tracker = 2
                                 time.sleep(4)
                                 continue
-                            elif 1 in result['cast']:
+
+                            if (cast[0] == 1) or (cast[1] == 1):
                                 print("You lost your turn and its score :/")
                                 tracker = 2
                                 time.sleep(4)
                                 continue
-                            else:
-                                scoreboard.update_score(
-                                    player1.get_name(), result['sum'])
+
+                            scoreboard.update_score(
+                                player1.get_name(), sum_score)
                     case 2:
                         if tracker == 1:
                             tracker = 2
                             continue
                     case 3:
                         new_name = str(input("Enter a new name: "))
+
                         if tracker == 1:
+                            scoreboard.update_name(
+                                player1.get_name(), new_name)
                             player1.set_name(new_name)
+
+                        terminal.display_clear()
+
                     case 4:
                         break
-
-                    case _:
-                        continue
 
         end_game(scoreboard)
 
