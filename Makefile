@@ -29,7 +29,7 @@ uml:
 coverage:
 	@printf "\n\e[\033[0;45m\e[1m UNIT TESTING: \e[0m\n"
 	@printf "\n\e[\033[0;42m\e[1m COVERAGE DONE: \e[0m\n"
-	-coverage run --omit=$(dir)/test_*.py -m unittest discover -s $(dir) -p "test_*.py"
+	-coverage run --omit=$(dir)/test_*.py,$(dir)/__*.py,$(dir)/*/test_*.py,$(dir)/*/__*.py,./src/__*.py -m unittest discover -s $(dir) -p "test_*.py"
 	@printf "\n"
 	@printf "\n\e[\033[0;42m\e[1m COVERAGE EXPORTED: \e[0m\n"
 	-coverage html -d $(dir)/htmlcov
