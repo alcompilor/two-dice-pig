@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""Main module to implement the logic of the game."""
+
 import random
 import time
 from textwrap import dedent
@@ -148,18 +153,18 @@ class Main(Cmd):
                     print(f"{player2.get_name()} chose to roll!\n")
                     result_bot = dice.roll(computer.get_biased_list())
                     terminal.display_dice(result_bot['cast'])
-                    if result_bot['cast'][0] == 1 and result_bot['cast'][1] == 1:
+                    if (result_bot['cast'][0] == 1 and
+                            result_bot['cast'][1] == 1):
                         scoreboard.reset_score(player2.get_name())
                         tracker = 1
                         print(
-                            f"{player2.get_name()} lost their entire score :(\n")
+                            f"{player2.get_name()} lost the entire score :(\n")
                         time.sleep(4)
                         terminal.display_clear()
                         continue
                     elif 1 in result_bot['cast']:
                         tracker = 1
-                        print(
-                            f"{player2.get_name()} lost their turn and its score :/\n")
+                        print(f"{player2.get_name()} lost their turn :/\n")
                         time.sleep(4)
                         terminal.display_clear()
                         continue
