@@ -44,3 +44,7 @@ test: lint coverage
 # Run doc on a specified module #
 doc:
 	python -m pydoc $(module)
+
+# Run main.py #
+play:
+	python ./src/main.py
