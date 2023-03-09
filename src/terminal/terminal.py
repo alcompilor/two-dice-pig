@@ -37,10 +37,10 @@ class Terminal:
     def display_intro_menu(self):
         """Display game intro/main menu."""
         return print(dedent("""\
-                    1. Player vs Player
-                    2. Player vs Computer
-                    3. View game rules
-                    4. Quit\n"""))
+                    - Player vs Player | (multiplayer)
+                    - Player vs Bot | (bot)
+                    - View game rules | (rules)
+                    - Exit | (exit)\n"""))
 
     def display_computer_menu(self):
         """Display computer difficulty menu."""
@@ -105,7 +105,7 @@ class Terminal:
 
     def display_winner(self, player_name):
         """Display game winner."""
-        return print(art.text2art(f"{player_name}  won!",
+        return print(art.text2art(f"{player_name}  won!\n",
                                   font="tarty1"))
 
     def display_clear(self):
