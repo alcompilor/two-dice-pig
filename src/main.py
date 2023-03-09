@@ -1,5 +1,6 @@
 import random
 import time
+from textwrap import dedent
 from cmd import Cmd
 from computer.computer import Computer
 from dice.dice import Dice
@@ -229,6 +230,15 @@ class Main(Cmd):
         """Command to display game rules."""
         terminal = Terminal()
         terminal.display_rules()
+
+    def do_credits(self, _):
+        """Command to display project credits."""
+        print(dedent("""\n
+            This project is made by:
+            Ahmed Abbasi & Mohamed Nour Humeidi\n
+            You may also visit our github repository for more-
+            information about the project:
+            https://github.com/bigcbull/two-dice-pig\n"""))
 
     def do_exit(self, _):
         """Command to exit game."""
