@@ -22,7 +22,7 @@ class Scoreboard:
                 self.scores[i][1] += score
 
     def update_name(self, current_name, new_name):
-        """Update name of player in scorebaord."""
+        """Update name of player in scoreboard."""
         for i, _ in enumerate(self.scores):
             if current_name in self.scores[i][0]:
                 self.scores[i][0] = new_name
