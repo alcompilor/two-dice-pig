@@ -1,0 +1,1 @@
+"""Init dice package."""
