@@ -15,7 +15,7 @@ from scoreboard.scoreboard import Scoreboard
 from terminal.terminal import Terminal
 
 
-terminal = Terminal()
+terminal = Terminal()  # global usage
 
 
 class Main(Cmd):
@@ -32,11 +32,10 @@ class Main(Cmd):
         player1, player2 = create_players(True)
         scoreboard, dice = init_game(player1, player2)
 
-        terminal.display_clear()
+        terminal.display_clear()  # clear terminal for better experience
 
-        tracker = 1
+        tracker = 1  # keep track of turns, player1 = 1, player2 = 2
         while not scoreboard.get_winner():  # game round loop
-            # terminal.display_clear()
             terminal.display_table(scoreboard.get_scores())
             terminal.display_realtime_menu()
 
@@ -47,18 +46,19 @@ class Main(Cmd):
 
             choice = validate_option("Choose an option > ", "Invalid option!")
 
-            match(choice):
+            match(choice):  # logic based on option
                 case 1:
                     terminal.display_clear()
 
                     cast, sum_score = dice.roll(dice.faces).values()
-                    terminal.display_dice(cast)
+                    terminal.display_dice(cast)  # display dice
 
-                    if tracker == 1:
+                    if tracker == 1:  # if it's player1 turn
 
                         if (cast[0] == 1) and (cast[1] == 1):
-                            scoreboard.reset_score(player1.get_name())
-                            tracker = 2
+                            scoreboard.reset_score(
+                                player1.get_name())
+                            tracker = 2  # give turn to player2
                             continue
 
                         if (cast[0] == 1) or (cast[1] == 1):
@@ -67,11 +67,11 @@ class Main(Cmd):
 
                         scoreboard.update_score(
                             player1.get_name(), sum_score)
-                    else:
+                    else:  # if it's player2 turn
 
                         if (cast[0] == 1) and (cast[1] == 1):
                             scoreboard.reset_score(player2.get_name())
-                            tracker = 1
+                            tracker = 1  # give turn to player1
                             continue
 
                         if (cast[0] == 1) or (cast[1] == 1):
@@ -96,12 +96,12 @@ class Main(Cmd):
                         "Name is too short or already in use",
                         scoreboard)
 
-                    if tracker == 1:
+                    if tracker == 1:  # change player1 name
                         scoreboard.update_name(
                             player1.get_name(), new_name)
                         player1.set_name(new_name)
 
-                    if tracker == 2:
+                    if tracker == 2:  # change player2 name
                         scoreboard.update_name(
                             player2.get_name(), new_name)
                         player2.set_name(new_name)
@@ -110,7 +110,7 @@ class Main(Cmd):
                 case 4:
                     break
 
-        end_game(scoreboard)
+        end_game(scoreboard)  # finish game
 
     def do_bot(self, _):
         """Command to invoke player vs bot game."""
@@ -123,21 +123,22 @@ class Main(Cmd):
         difficulty = validate_option(
             "Choose bot difficulty > ", "Invalid option!")
 
-        bot = Computer(difficulty)
+        bot = Computer(difficulty)  # create bot
         terminal.display_clear()
 
-        tracker = 1
+        tracker = 1  # keep track of turns, player = 1, bot = 2
         while not scoreboard.get_winner():  # game round loop
             terminal.display_table(scoreboard.get_scores())
             terminal.display_realtime_menu()
 
-            if tracker == 2:
+            if tracker == 2:  # if it's the bot's turn
                 terminal.display_clear()
                 print(f"{player2.get_name()} turn")
 
+                # decide whether to roll or pass
                 bot_decision = random.choice(bot.get_decision_list())
 
-                if bot_decision == "roll":
+                if bot_decision == "roll":  # if bot rolls
 
                     print(f"{player2.get_name()} chose to roll!\n")
                     cast, sum_score = dice.roll(bot.get_biased_list()).values()
@@ -149,7 +150,7 @@ class Main(Cmd):
                         tracker = 1
                         print(
                             f"{player2.get_name()} lost the entire score :(\n")
-                        time.sleep(4)
+                        time.sleep(4)  # improves game flow
                         terminal.display_clear()
                         continue
 
@@ -166,18 +167,18 @@ class Main(Cmd):
                     time.sleep(4)
                     continue
 
-                else:
+                else:  # if bot passes
                     print(f"{player2.get_name()} chose to pass..\n")
                     tracker = 1
                     time.sleep(2)
                     terminal.display_clear()
                     continue
-            else:
+            else:  # if it's the player's turn
                 print("It's your turn!\n")
                 choice = validate_option(
                     "Choose an option > ", "Invalid option!")
 
-                match(choice):
+                match(choice):  # logic based on option
                     case 1:
                         terminal.display_clear()
 
@@ -257,12 +258,12 @@ def validate_option(prompt, error):
     while True:
         try:
             choice = int(input(prompt))
-            if "difficulty" not in prompt:
+            if "difficulty" not in prompt:  # for in-game menu
                 if not 0 < choice < 5:
                     raise ValueError
                 return choice
 
-            if not 0 < choice < 4:
+            if not 0 < choice < 4:  # for choosing bot difficulty
                 raise ValueError
             return choice
 
@@ -274,14 +275,14 @@ def validate_option(prompt, error):
 def validate_name(prompt, error, scoreboard):
     """Validate name before changing it."""
     forbidden_names = ["Alex (bot)", "Nadia (bot)",
-                       "Alice (bot)", "John (bot)"]
+                       "Alice (bot)", "John (bot)"]  # used by bot
     while True:
         name = str(input(prompt))
-        if not scoreboard:
+        if not scoreboard:  # when creating new players
             if (len(name) < 1) or (name in forbidden_names):
                 print(error)
                 continue
-        else:
+        else:  # when changing name during game
             if (len(name) < 1 or scoreboard.get_player(name) or
                     name in forbidden_names):
                 print(error)
@@ -291,13 +292,13 @@ def validate_name(prompt, error, scoreboard):
 
 def create_players(is_multiplayer):
     """Create players for the game."""
-    if is_multiplayer:
+    if is_multiplayer:  # player vs player
         player1_name = validate_name(
             "Enter your name (Player 1): ",
             "Name too short",
             scoreboard=False)
 
-        while True:
+        while True:  # validates it's not same as player1 name
             player2_name = validate_name(
                 "Enter your name (Player 2): ",
                 "Name too short or already in use",
@@ -312,7 +313,7 @@ def create_players(is_multiplayer):
         player2 = Player(player2_name, False)
         return player1, player2
 
-    else:
+    else:  # player vs bot
         player1_name = validate_name(
             "Enter your name (Player 1): ",
             "Name too short or can't be used",
