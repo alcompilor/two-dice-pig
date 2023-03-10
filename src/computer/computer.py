@@ -64,12 +64,12 @@ class Computer:
                 shuffle(decision_list)
                 return decision_list
             case 2:
-                decision_list = ["pass", "roll", "roll", "roll"]
+                decision_list = ["pass", "roll", "roll", "roll", "roll"]
                 shuffle(decision_list)
                 return decision_list
             case 3:
                 decision_list = ["pass", "roll", "roll",
-                                 "roll", "roll", "roll"]
+                                 "roll", "roll", "roll", "roll"]
                 shuffle(decision_list)
                 return decision_list
 
