@@ -45,7 +45,7 @@ class Main(Cmd):
             else:
                 print(f"It's {player2.get_name()}'s turn\n")
 
-            choice = validate("Choose an option > ", "Invalid option!")
+            choice = validate_option("Choose an option > ", "Invalid option!")
 
             match(choice):
                 case 1:
@@ -91,14 +91,17 @@ class Main(Cmd):
                     continue
 
                 case 3:
-                    new_name = str(input("Enter a new name: "))
+                    new_name = validate_name(
+                        "Enter a new name: ",
+                        "Name is too short or already in use",
+                        scoreboard)
 
                     if tracker == 1:
                         scoreboard.update_name(
                             player1.get_name(), new_name)
                         player1.set_name(new_name)
 
-                    else:
+                    if tracker == 2:
                         scoreboard.update_name(
                             player2.get_name(), new_name)
                         player2.set_name(new_name)
@@ -117,7 +120,8 @@ class Main(Cmd):
         terminal.display_clear()
 
         terminal.display_computer_menu()
-        difficulty = validate("Choose bot difficulty > ", "Invalid option!")
+        difficulty = validate_option(
+            "Choose bot difficulty > ", "Invalid option!")
 
         bot = Computer(difficulty)
         terminal.display_clear()
@@ -170,7 +174,8 @@ class Main(Cmd):
                     continue
             else:
                 print("It's your turn!\n")
-                choice = validate("Choose an option > ", "Invalid option!")
+                choice = validate_option(
+                    "Choose an option > ", "Invalid option!")
 
                 match(choice):
                     case 1:
@@ -201,7 +206,10 @@ class Main(Cmd):
                             tracker = 2
                             continue
                     case 3:
-                        new_name = str(input("Enter a new name: "))
+                        new_name = validate_name(
+                            "Enter a new name: ",
+                            "Name is too short or already in use",
+                            scoreboard)
 
                         if tracker == 1:
                             scoreboard.update_name(
@@ -244,7 +252,7 @@ def welcome():
     print("Type 'help' to see available commands.\n")
 
 
-def validate(prompt, error):
+def validate_option(prompt, error):
     """Validate inputted int."""
     while True:
         try:
@@ -263,15 +271,40 @@ def validate(prompt, error):
             continue
 
 
+def validate_name(prompt, error, scoreboard):
+    """Validate name before changing it."""
+    forbidden_names = ["Alex (bot)", "Nadia (bot)",
+                       "Alice (bot)", "John (bot)"]
+    while True:
+        name = str(input(prompt))
+        if not scoreboard:
+            if (len(name) < 1) or (name in forbidden_names):
+                print(error)
+                continue
+        else:
+            if (len(name) < 1 or scoreboard.get_player(name) or
+                    name in forbidden_names):
+                print(error)
+                continue
+        return name
+
+
 def create_players(is_multiplayer):
     """Create players for the game."""
     if is_multiplayer:
-        player1_name = str(input("Enter your name (Player 1): "))
+        player1_name = validate_name(
+            "Enter your name (Player 1): ",
+            "Name too short",
+            scoreboard=False)
 
         while True:
-            player2_name = str(input("Enter your name (Player 2): "))
+            player2_name = validate_name(
+                "Enter your name (Player 2): ",
+                "Name too short or already in use",
+                scoreboard=False)
+
             if player1_name == player2_name:
-                print("You can't have the same name as Player 1")
+                print("Name can't be same as Player 2")
                 continue
             break
 
@@ -280,7 +313,11 @@ def create_players(is_multiplayer):
         return player1, player2
 
     else:
-        player1_name = str(input("Enter your name: "))
+        player1_name = validate_name(
+            "Enter your name (Player 1): ",
+            "Name too short or can't be used",
+            scoreboard=False)
+
         player2_name = random.choice(
             ["Alex (bot)", "Nadia (bot)", "Alice (bot)", "John (bot)"])
 
