@@ -14,17 +14,18 @@ class ScoreboardTestCase(unittest.TestCase):
         """Create a scoreboard with two players."""
         players = ["Mohamed", "Ahmed"]
         scoreboard = Scoreboard(players)
-
         assert scoreboard.get_scores() == [["Mohamed", 0], ["Ahmed", 0]]
 
         scoreboard.update_score("Mohamed", 10)
-
+        self.assertIs(scoreboard.get_winner(), None)
         assert scoreboard.get_player("Mohamed") == ["Mohamed", 10]
+
         scoreboard.update_name("Mohamed", "Richard")
         assert scoreboard.get_player("Richard") == ["Richard", 10]
 
         scoreboard.reset_score("Richard")
         assert scoreboard.get_player("Richard") == ["Richard", 0]
+        self.assertIs(scoreboard.get_winner(), None)
 
         scoreboard.update_score("Richard", 100)
         assert scoreboard.get_winner() == "Richard"
