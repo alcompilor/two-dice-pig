@@ -1,4 +1,4 @@
-# 🎮 Two-Dice Pig Game
+# 🎲 Two-Dice Pig Game
 
 Here's a brief description of how to play the game:
 
@@ -24,7 +24,7 @@ Here's a brief description of how to play the game:
 
 **graphviz** - Optional and only required in case you want to generate UML for the codebase
 
-## 🎲 Get Started
+## 🎮 Get Started
 
 _Follow the steps below to start playing the game_
 
@@ -69,6 +69,8 @@ Don't forget to deactivate the virtual environment when done
 ```bash
   deactivate
 ```
+
+**_Important:_** _Always reactivate the virtual environment before playing._
 
 **_Note:_** _Running 'make' without specifying any args will result in 'make init' being invoked._
 
@@ -123,3 +125,17 @@ To generate UML for the codebase, simply run the following command
 After running the command, UMLs will be generated in the root directory.
 
 **_Note:_** _Windows users might need to use a bash terminal such as [git bash](https://gitforwindows.org/) in order for this to work correctly._
+
+## 🤖 Computer Intelligence - for development purposes
+
+We had the opportunity to implement a dice game that required randomness in its gameplay mechanics. However, we wanted to create a unique gameplay experience by **biasing the probabilities of certain outcomes** to make the game more exciting and unpredictable.
+
+In order to accomplish this, we used **biased probability to limit the possibility that particular outcomes would occur while rolling the dice.**
+
+For instance, we made it more likely for bots to win more points in the hard level by **raising the likelihood that they would roll a higher number on the die.** To make it harder for players to defeat bots, we **simultaneously decreased the likelihood of a bot rolling a low number.** The bot's ability to select whether to roll or pass the dice was likewise handled using the same method.
+
+By introducing these biased probabilities, we were able to create a gameplay experience that was both challenging and unpredictable.
+
+It is important to note that introducing biased probability into a game **requires careful consideration and testing to ensure that the gameplay remains fair and balanced.** If the probabilities are too heavily skewed, the game may become unbalanced and lose its appeal to players. Therefore, it is important to carefully adjust the probabilities to create a unique gameplay experience while maintaining fairness and balance.
+
+Overall, using biased probability to affect randomness in a dice game can be an effective way to create a more engaging and exciting gameplay experience. With careful planning and testing, it is possible to introduce biased probability in a way that is both enjoyable and fair for players.
