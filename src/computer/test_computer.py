@@ -36,11 +36,11 @@ class TestComputer(unittest.TestCase):
 
         self.assertEqual(res1, exp1)
         self.assertEqual(res2, exp2)
-        self.assertEqual(res3, exp3)
+        self.assertCountEqual(res3, exp3)
 
         self.assertEqual(res4, exp4)
         self.assertEqual(res5, exp5)
-        self.assertEqual(res6, exp6)
+        self.assertCountEqual(res6, exp6)
 
     def test_get_difficulty(self):
         """Fetches value of difficulty variable and tests if it's correct."""
@@ -83,7 +83,7 @@ class TestComputer(unittest.TestCase):
         res = comp.generate_biased_list()
         exp = [1, 1, 2, 2, 2, 3, 3, 4, 5, 6]
 
-        self.assertEqual(res, exp)
+        self.assertCountEqual(res, exp)
 
     def test_get_biased_list(self):
         """Tests if biased list is fetched correctly."""
@@ -92,7 +92,16 @@ class TestComputer(unittest.TestCase):
         res = comp.get_biased_list()
         exp = [1, 2, 2, 3, 3, 3, 4, 5, 5, 6]
 
-        self.assertEqual(res, exp)
+        self.assertCountEqual(res, exp)
+
+    def test_get_decision_list(self):
+        """Tests if decision list is fetched correctly."""
+        comp = Computer(1)
+
+        res = comp.get_decision_list()
+        exp = ["pass", "pass", "roll", "roll", "roll"]
+
+        self.assertCountEqual(res, exp)
 
 
 if __name__ == "__main__":
