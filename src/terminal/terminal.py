@@ -5,6 +5,7 @@
 
 import os
 import platform
+from pathlib import Path
 from textwrap import dedent
 import climage
 import art
@@ -14,6 +15,10 @@ import tabulate
 class Terminal:
     """Terminal Class."""
 
+    def __init__(self):
+        """Init constructor terminal class."""
+        self.assets_path = (Path(__file__).parent).joinpath('img')
+
     def display_title(self):
         """Display game title."""
         return print(art.text2art("TWO  DICE  PIG", font="tarty3"))
@@ -22,7 +27,7 @@ class Terminal:
         """Display game intro image."""
         return print(
             climage.convert(
-                'src/terminal/img/dice_intro.jpg',
+                f'{self.assets_path}/dice_intro.jpg',
                 is_unicode=True,
                 width=61,
                 palette="gruvbox"
@@ -77,14 +82,14 @@ class Terminal:
     def display_dice(self, faces_tuple):
         """Display the two dices a player gets."""
         dice1 = climage.convert(
-            f'src/terminal/img/dice_{faces_tuple[0]}.png',
+            f'{self.assets_path}/dice_{faces_tuple[0]}.png',
             is_unicode=True,
             is_truecolor=True,
             is_256color=False,
             width=12
         )
         dice2 = climage.convert(
-            f'src/terminal/img/dice_{faces_tuple[1]}.png',
+            f'{self.assets_path}/dice_{faces_tuple[1]}.png',
             is_unicode=True,
             is_truecolor=True,
             is_256color=False,
