@@ -27,6 +27,8 @@ Here's a brief description of how to play the game:
 
 **graphviz** - Optional and only required in case you want to generate UML for the codebase
 
+**_Important:_** _Use just native terminal/cmd to launch the game; avoid using IDEs._
+
 ## 🎮 Get Started
 
 _Follow the steps below to start playing the game_
