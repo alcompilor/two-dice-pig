@@ -54,7 +54,7 @@ Create and activate a virtual environment - (Linux/macOS)
 Create and activate a virtual environment - (Windows)
 
 ```bash
-  python -m venv venv && . .venv/Scripts/activate
+  python -m venv venv && .\venv\Scripts\activate
 ```
 
 Install required dependencies
