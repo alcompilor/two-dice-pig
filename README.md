@@ -1,5 +1,8 @@
 # 🎲 Two-Dice Pig Game
 
+| ![license badge](https://img.shields.io/badge/license%20-MIT-green) | ![coverage badge](https://img.shields.io/badge/coverage%20-96%25-success) | ![pylint badge](https://img.shields.io/badge/pylint-passed-blue) | ![flake8 badge](https://img.shields.io/badge/flake8-passed-blue) |
+| :-----------------------------------------------------------------: | :-----------------------------------------------------------------------: | :--------------------------------------------------------------: | :--------------------------------------------------------------: |
+
 Here's a brief description of how to play the game:
 
 - The game is played by two players or against the computer, and each turn consists of a player rolling two six-sided dice.
